@@ -2,6 +2,7 @@ class Node {
   key;
   left;
   right;
+  p;
 
   constructor(key) {
     this.key = key;

@@ -48,13 +48,7 @@ class BinarySearchTree {
   }
 
   min() {
-    let node = this.root;
-
-    while (node.left !== undefined) {
-      node = node.left;
-    }
-
-    return node.key;
+    return this._min(this.root).key
   }
 
   max() {
@@ -67,19 +61,46 @@ class BinarySearchTree {
     return node.key;
   }
 
+  succesor(node) {
+    if (node.right !== undefined) {
+      return this._min(node.right);
+    }
+
+    let y = node.p;
+
+    while (y !== undefined && y?.key === node.key) {
+      x = y;
+      y = y.p;
+    }
+
+    return y;
+  }
+
   toJson() {
     return JSON.stringify(this.root, null, 2)
+  }
+
+  _min(root) {
+    let node = root;
+
+    while (node.left !== undefined) {
+      node = node.left;
+    }
+
+    return node;
   }
 
   _insertNode(node, newNode) {
     if (newNode.key < node.key) {
       if (node.left === undefined) {
+        newNode.p = node;
         node.left = newNode
       } else {
         this._insertNode(node.left, newNode)
       }
     } else {
       if (node.right === undefined) {
+        newNode.p = node;
         node.right = newNode
       } else {
         this._insertNode(node.right, newNode)

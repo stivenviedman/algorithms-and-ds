@@ -71,3 +71,24 @@ test('max', () => {
 
   assert.strictEqual(bt.max(), 10);
 });
+
+test('succesor of 1 is 2', () => {
+  const bt = initializeBt([1,2,3,-2,10,4,-8,-1]);
+
+  assert.strictEqual(bt.root.key, 1);
+  assert.strictEqual(bt.succesor(bt.root).key, 2);
+});
+
+test('succesor of 2 is 3', () => {
+  const bt = initializeBt([1,2,3,-2,10,4,-8,-1]);
+
+  assert.strictEqual(bt.root.right.key, 2);
+  assert.strictEqual(bt.succesor(bt.root.right).key, 3);
+});
+
+test('succesor of 4 is 10', () => {
+  const bt = initializeBt([1,2,3,-2,10,4,-8,-1]);
+
+  assert.strictEqual(bt.root.right.right.right.left.key, 4);
+  assert.strictEqual(bt.succesor(bt.root.right.right.right.left).key, 10);
+});
