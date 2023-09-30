@@ -52,16 +52,10 @@ class BinarySearchTree {
   }
 
   max() {
-    let node = this.root;
-
-    while (node.right !== undefined) {
-      node = node.right;
-    }
-
-    return node.key;
+    return this._max(this.root).key;
   }
 
-  succesor(node) {
+  successor(node) {
     if (node.right !== undefined) {
       return this._min(node.right);
     }
@@ -76,8 +70,41 @@ class BinarySearchTree {
     return y;
   }
 
+  predecessor(node) {
+    if (node.left !== undefined) {
+      return this._max(node.left);
+    }
+
+    // root node without left branch - means there's no lesser number
+    if (node.p === undefined) {
+      return undefined;
+    }
+
+    // min has no predecesor
+    if (this.min() === node.key) {
+      return undefined
+    }
+
+    // node is the right child of its parent, the its parent is its predecessor
+    if (node.p?.right?.key === node.key) {
+      return node.p
+    }
+
+    return node.p.p
+  }
+
   toJson() {
     return JSON.stringify(this.root, null, 2)
+  }
+
+  _max(root) {
+    let node = root;
+
+    while (node.right !== undefined) {
+      node = node.right;
+    }
+
+    return node;
   }
 
   _min(root) {
