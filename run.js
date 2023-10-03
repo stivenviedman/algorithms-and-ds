@@ -4,7 +4,8 @@ const path = require('node:path');
 
 run({
     files: [
-      path.resolve('./binary-search-tree/test.js')
+      path.resolve('./binary-search-tree/test.js'),
+      path.resolve('./balanced-brackets/test.js')
     ]
   })
   .compose(tap)
