@@ -128,3 +128,21 @@ test('predecessor of 4 is 3', () => {
   assert.strictEqual(node.key, 4);
   assert.strictEqual(bt.predecessor(node).key, 3);
 });
+
+test('height is 4', () => {
+  const bt = initializeBt([1,2,3,-2,10,4,-8,-1]);
+
+  assert.strictEqual(bt.heigth(), 4);
+});
+
+test('height is 5', () => {
+  const bt = initializeBt([1,2,3,4,5,6,-1]);
+
+  assert.strictEqual(bt.heigth(), 5);
+});
+
+test('level order', () => {
+  const bt = initializeBt([1,2,3,-2,10,4,-8,-1]);
+
+  assert.deepEqual(bt.orderLevelTreeWalk(), [1,-2,2,-8,-1,3,10,4]);
+});

@@ -55,6 +55,12 @@ class BinarySearchTree {
     return this._max(this.root).key;
   }
 
+  heigth() {
+    const result = this._heigth(this.root);
+
+    return result === 0 ? result : result - 1
+  }
+
   successor(node) {
     if (node.right !== undefined) {
       return this._min(node.right);
@@ -93,8 +99,43 @@ class BinarySearchTree {
     return node.p.p
   }
 
+  orderLevelTreeWalk() {
+    const h = this.heigth() + 1;
+
+    for(let i = 0; i <= h; i++) {
+      this._levelTreeWalk(this.root, i);
+    }
+
+    return this.treeWalkResult;
+  }
+
   toJson() {
     return JSON.stringify(this.root, null, 2)
+  }
+
+  _levelTreeWalk(root, level) {
+    if (root === undefined) {
+      return;
+    }
+
+    if (level === 1) {
+      this.treeWalkResult.push(root.key);
+      return
+    }
+
+    this._levelTreeWalk(root.left, level - 1);
+    this._levelTreeWalk(root.right, level - 1);
+  }
+
+  _heigth(root) {
+    if (!root) {
+      return 0
+    }
+
+    const left = this._heigth(root ? root.left : null)
+    const right =  this._heigth(root ? root.right : null)
+
+    return Math.max(left, right) + 1
   }
 
   _max(root) {
